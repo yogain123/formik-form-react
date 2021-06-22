@@ -20,8 +20,10 @@ const SignupForm = () => {
       errors.lastName = 'Must be 20 characters or less';
     }
 
+    debugger;
+    errors.emailArr = [];
     values.emailArr.forEach((item, index) => {
-      errors.emailArr = [];
+
       if (!item.email) {
         errors.emailArr[index] = { email: "required" }
       }
@@ -30,9 +32,6 @@ const SignupForm = () => {
     if (errors && errors.emailArr.length === 0) {
       delete errors.emailArr;
     }
-
-
-    console.log({ errors, values });
     return errors;
   };
 
@@ -60,7 +59,6 @@ const SignupForm = () => {
         onBlur={handleBlur}
         value={values.firstName}
       />
-      {JSON.stringify(touched, null, 2)}
       {touched.firstName && errors.firstName ? (
         <div>{errors.firstName}</div>
       ) : null}
