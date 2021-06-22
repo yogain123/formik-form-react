@@ -6,7 +6,7 @@ function Email({ handleBlur, handleChange, values, touched, errors, index, item 
     <input
       id="email"
       name={`emailArr[${index}].email`}
-      type="email"
+      type="text"
       onChange={handleChange}
       onBlur={handleBlur}
       value={values && values.emailArr[index] && values.emailArr[index].email}

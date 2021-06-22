@@ -20,7 +20,6 @@ const SignupForm = () => {
       errors.lastName = 'Must be 20 characters or less';
     }
 
-    debugger;
     errors.emailArr = [];
     values.emailArr.forEach((item, index) => {
 
@@ -43,8 +42,10 @@ const SignupForm = () => {
       emailArr: [{ email: "" }]
     },
     validate,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      // alert(JSON.stringify(values, null, 2));
+      const data = await fetch("https://jsonplaceholder.typicode.com/posts");
+      const res = data.json();
     },
   });
   return (
@@ -85,8 +86,10 @@ const SignupForm = () => {
         touched={touched}
         errors={errors} handleChange={handleChange} />)}
 
+      {console.log({ isSubmitting })}
 
-      <button disabled={!(isValid && dirty)} type="submit">Submit</button>
+
+      <button disabled={!(isValid && dirty) || isSubmitting} type="submit">{isSubmitting ? "Submittng..." : "Submit"}</button>
       <button type="button" onClick={() => {
         const newValue = { ...values, emailArr: [...values.emailArr, { email: "" }] }
         setValues(newValue)
